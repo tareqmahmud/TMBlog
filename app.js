@@ -1,4 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose');
+
 
 // Initialize the dotenv
 require('dotenv').config();
@@ -13,9 +15,5 @@ app.get('/', (req, res) => {
     })
 })
 
-// Fire up the app
-const PORT = process.env.APP_PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`App is on fire port ${PORT}`);
-})
+module.exports = app;
