@@ -1,0 +1,9 @@
+{
+  "name": "tmblog",
+  "version": "1.0.0",
+  "description": "Multi-user blog application using monolithic application architecture",
+  "main": "app.js",
+  "repository": "git@github.com:tareqmahmud/tmblog.git",
+  "author": "MD Tareq Mahmud <tareqmahmud9@gmail.com>",
+  "license": "MIT"
+}
