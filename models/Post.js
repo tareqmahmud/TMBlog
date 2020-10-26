@@ -30,8 +30,16 @@ const postSchema = new Schema({
 
     readTime: String,
 
-    likes: [Schema.Types.objectId],
-    dislikes: [Schema.Types.objectId],
+    likes: [
+        {
+            type: Schema.Types.objectId,
+            ref: User
+        }
+    ],
+    dislikes: [{
+        type: Schema.Types.objectId,
+        ref: User
+    }],
 
     comments: [{
         type: Schema.Types.objectId,
