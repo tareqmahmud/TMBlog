@@ -1,4 +1,6 @@
 const {Schema, model} = require('mongoose');
+const User = require('./User');
+const Comment = require('./Comment');
 
 const postSchema = new Schema({
     title: {
@@ -15,7 +17,7 @@ const postSchema = new Schema({
 
     author: {
         type: Schema.Types.objectId,
-        ref: 'User',
+        ref: User,
         required: true
     },
 
@@ -33,7 +35,7 @@ const postSchema = new Schema({
 
     comments: [{
         type: Schema.Types.objectId,
-        ref: 'Comment'
+        ref: Comment
     }]
 }, {timestamps: true});
 
