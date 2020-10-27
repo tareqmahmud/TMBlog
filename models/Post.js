@@ -36,10 +36,7 @@ const postSchema = new Schema({
             ref: User
         }
     ],
-    dislikes: [{
-        type: Schema.Types.objectId,
-        ref: User
-    }],
+    dislikes: [Schema.Types.objectId],
 
     comments: [{
         type: Schema.Types.objectId,
