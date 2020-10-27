@@ -1,6 +1,6 @@
 const express = require('express');
-const mongoose = require('mongoose');
-
+const morgan = require('morgan');
+const useAuthRoute = require('./routes/authRoute');
 
 // Initialize the dotenv
 require('dotenv').config();
@@ -8,12 +8,29 @@ require('dotenv').config();
 // Initialize the app
 const app = express();
 
-// Routes
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Hello TMBlog'
-    })
-})
+// Set view render engine
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
+// App middleware collection
+const appMiddleware = [
+    // Set public directory for server static files
+    express.static('public'),
+
+    // Set URL Encoded parser
+    express.urlencoded({extended: true}),
+
+    // Set JSON parser
+    express.json(),
+
+    // Set morgan middleware
+    morgan('dev')
+];
+
+// Use middleware
+app.use(appMiddleware);
+
+// Use routes
+app.use('/users', useAuthRoute);
 
 module.exports = app;
