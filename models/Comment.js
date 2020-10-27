@@ -1,17 +1,15 @@
 const {Schema, model} = require('mongoose');
-const Post = require('./Post');
-const User = require('./User');
 
 const commentSchema = new Schema({
     post: {
         type: Schema.Types.objectId,
-        ref: Post,
+        ref: 'Post',
         required: true
     },
 
     user: {
         type: Schema.Types.objectId,
-        ref: User,
+        ref: 'User',
         required: true
     },
 
@@ -30,7 +28,7 @@ const commentSchema = new Schema({
 
         user: {
             type: Schema.Types.objectId,
-            ref: User,
+            ref: 'User',
             required: true
         },
 

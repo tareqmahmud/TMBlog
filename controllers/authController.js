@@ -1,3 +1,5 @@
+const User = require('../models/User');
+
 /**
  * View signup form
  *
@@ -16,8 +18,24 @@ const signUpGetController = (req, res) => {
  * @param req
  * @param res
  */
-const signUpPostController = (req, res) => {
+const signUpPostController = async (req, res) => {
+    // Extract all the form request data
+    const {username, email, password, confirmPassword} = req.body;
 
+    // Add validation here
+
+    // Create the User model object
+    const user = new User({
+        username,
+        email,
+        password
+    });
+
+    // Save the object to the database
+    const createdUser = await user.save();
+
+    // Redirect to the login page
+    return res.redirect('/auth/login');
 }
 
 /**

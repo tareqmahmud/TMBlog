@@ -1,11 +1,10 @@
 const {Schema, model} = require('mongoose');
-const Post = require('./Post');
-const User = require('./User');
+
 
 const ProfileSchema = new Schema({
     user: {
         type: Schema.Types.objectId,
-        ref: User,
+        ref: 'User',
         required: true
     },
 
@@ -41,7 +40,7 @@ const ProfileSchema = new Schema({
     posts: [
         {
             type: Schema.Types.objectId,
-            ref: Post
+            ref: 'Post'
 
         }
     ],
@@ -49,7 +48,7 @@ const ProfileSchema = new Schema({
     bookmarks: [
         {
             type: Schema.Types.objectId,
-            ref: Post
+            ref: 'Post'
         }
     ]
 

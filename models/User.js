@@ -1,5 +1,4 @@
 const {Schema, model} = require('mongoose');
-const Profile = require('./Profile');
 
 // Create User Schema
 const UserSchema = new Schema({
@@ -8,13 +7,15 @@ const UserSchema = new Schema({
         trim: true,
         minlength: 4,
         maxlength: 30,
-        required: true
+        required: true,
+        unique: true
     },
 
     email: {
         type: String,
         trim: true,
-        required: true
+        required: true,
+        unique: true
     },
 
     password: {
@@ -25,8 +26,8 @@ const UserSchema = new Schema({
     },
 
     profile: {
-        type: Schema.Types.objectId,
-        ref: Profile
+        type: Schema.Types.ObjectId,
+        ref: 'Profile'
     }
 }, {timestamps: true});
 
