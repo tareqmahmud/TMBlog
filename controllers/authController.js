@@ -5,7 +5,9 @@
  * @param res
  */
 const signUpGetController = (req, res) => {
-
+    res.render('pages/auth/signup', {
+        title: 'Create new account'
+    })
 };
 
 /**
@@ -25,7 +27,9 @@ const signUpPostController = (req, res) => {
  * @param res
  */
 const loginGetController = (req, res) => {
-
+    res.render('pages/auth/login', {
+        title: 'Login your account'
+    })
 }
 
 /**

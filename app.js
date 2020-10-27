@@ -31,6 +31,6 @@ const appMiddleware = [
 app.use(appMiddleware);
 
 // Use routes
-app.use('/users', useAuthRoute);
+app.use('/auth', useAuthRoute);
 
 module.exports = app;

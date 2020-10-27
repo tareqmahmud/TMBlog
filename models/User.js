@@ -3,7 +3,7 @@ const Profile = require('./Profile');
 
 // Create User Schema
 const UserSchema = new Schema({
-    name: {
+    username: {
         type: String,
         trim: true,
         minlength: 4,
