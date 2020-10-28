@@ -11,23 +11,36 @@
                 <div class="card-body">
                     <form action="/auth/login" method="post">
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" name="username"
-                                   id="username" class="form-control"
-                                   placeholder="Please enter the username">
+                            <label for="email">Email</label>
+                            <input type="email" name="email"
+                                   id="email" class="form-control <%= errors.email ? 'is-invalid' : '' %>"
+                                   placeholder="Please enter an email">
+                            <% if (errors.email) { %>
+                                <div class="invalid-feedback">
+                                    <%- errors.email %>
+                                </div>
+                            <% } %>
                         </div>
 
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" name="password"
-                                   id="password" class="form-control"
-                                   placeholder="Please the the password">
+                                   id="password" class="form-control <%= errors.password ? 'is-invalid' : '' %>"
+                                   placeholder="Please enter an strong password">
+                            <% if (errors.password) { %>
+                                <div class="invalid-feedback">
+                                    <%- errors.password %>
+                                </div>
+                            <% } %>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-block">Login</button>
+                            <button type="submit" class="btn btn-success">Login</button>
                         </div>
                     </form>
+
+                    <a href="/auth/signup">If you don't have an account?</a>
+
                 </div>
             </div>
         </div>
