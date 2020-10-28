@@ -42,8 +42,8 @@ module.exports = [
 
     // Validate confirm password
     body('confirmPassword')
-        .custom((password, {req}) => {
-            if (password !== req.confirmPassword){
+        .custom((confirmPassword, {req}) => {
+            if (confirmPassword !== req.body.password){
                 throw new Error('Confirm password does\'t match with the password')
             }
 

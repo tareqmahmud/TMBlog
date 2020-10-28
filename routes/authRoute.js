@@ -1,6 +1,7 @@
 const route = require('express').Router();
 const signUpValidator = require('../validators/auth/signUpValidator');
 const loginValidator = require('../validators/auth/loginValidator');
+const {isAuthenticated, isNotAuthenticated} = require('../middlewares/authMiddleware');
 
 const {
     signUpGetController,
@@ -14,14 +15,14 @@ const {
 
 
 // Signup Route
-route.get('/signup', signUpGetController);
-route.post('/signup', signUpValidator, signUpPostController);
+route.get('/signup', isNotAuthenticated, signUpGetController);
+route.post('/signup', isNotAuthenticated, signUpValidator, signUpPostController);
 
 // Login Route
-route.get('/login', loginGetController);
-route.post('/login', loginValidator , loginPostController);
+route.get('/login', isNotAuthenticated, loginGetController);
+route.post('/login', isNotAuthenticated, loginValidator, loginPostController);
 
 // Logout Route
-route.get('/logout', logoutGetController);
+route.get('/logout', isAuthenticated, logoutGetController);
 
 module.exports = route;

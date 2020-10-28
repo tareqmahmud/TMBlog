@@ -30,9 +30,7 @@ const signUpPostController = async (req, res) => {
     // Add validation here
     const signUpValidation = validationResult(req).formatWith(formatValidatorError);
 
-    console.log(signUpValidation.mapped());
-
-    if (!signUpValidation.isEmpty()){
+    if (!signUpValidation.isEmpty()) {
         return res.render('pages/auth/signup', {
             title: 'Create new account',
             errors: signUpValidation.mapped(),
@@ -64,6 +62,7 @@ const signUpPostController = async (req, res) => {
  * @param res
  */
 const loginGetController = (req, res) => {
+    // Show login form
     return res.render('pages/auth/login', {
         title: 'Login your account',
         errors: {}
@@ -83,7 +82,7 @@ const loginPostController = async (req, res) => {
     // Validate email and password
     const loginValidation = validationResult(req).formatWith(formatValidatorError);
 
-    if (!loginValidation.isEmpty()){
+    if (!loginValidation.isEmpty()) {
         return res.render('pages/auth/login', {
             title: 'Login your account',
             errors: loginValidation.mapped()
@@ -100,7 +99,7 @@ const loginPostController = async (req, res) => {
         })
     }
 
-    // If user available then
+    // If user available then check password
     const matchedPassword = await bcrypt.compare(password, user.password);
 
     // If password doesn't match then redirect with error
@@ -110,10 +109,15 @@ const loginPostController = async (req, res) => {
         })
     }
 
-    // And, Finally user credentials are correct so
-    // Logged in user and redirect to the homepage or dashboard page
-    res.redirect('/auth/signup')
+    // Create authenticate session for logged in user
+    req.session.isLoggedIn = true;
+    req.session.userId = user._id;
 
+    return req.session.save(() => {
+        // And, Finally user credentials are correct so
+        // Logged in user and redirect to the homepage or dashboard page
+        return res.redirect('/auth/signup')
+    })
 }
 
 /**
@@ -123,7 +127,11 @@ const loginPostController = async (req, res) => {
  * @param res
  */
 const logoutGetController = (req, res) => {
+    // Destroy the session
+    req.session.destroy();
 
+    // Redirect to the login page
+    return res.redirect('/auth/login');
 }
 
 module.exports = {
