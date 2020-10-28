@@ -2,6 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const {validationResult} = require('express-validator');
 const formatValidatorError = require('../utils/formatValidatorError');
+const Flash = require('../utils/Flash');
 
 /**
  * View signup form
@@ -13,7 +14,8 @@ const signUpGetController = (req, res) => {
     return res.render('pages/auth/signup', {
         title: 'Create new account',
         errors: {},
-        values: {}
+        values: {},
+        flashMessage: Flash.getMessages(req)
     })
 };
 
@@ -65,7 +67,8 @@ const loginGetController = (req, res) => {
     // Show login form
     return res.render('pages/auth/login', {
         title: 'Login your account',
-        errors: {}
+        errors: {},
+        flashMessage: Flash.getMessages(req)
     })
 }
 
@@ -116,6 +119,7 @@ const loginPostController = async (req, res) => {
     return req.session.save(() => {
         // And, Finally user credentials are correct so
         // Logged in user and redirect to the homepage or dashboard page
+        req.flash('success', 'Successfully logged in');
         return res.redirect('/auth/signup')
     })
 }
@@ -129,6 +133,8 @@ const loginPostController = async (req, res) => {
 const logoutGetController = (req, res) => {
     // Destroy the session
     req.session.destroy();
+
+    // Flash message
 
     // Redirect to the login page
     return res.redirect('/auth/login');

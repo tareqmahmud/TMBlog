@@ -1,3 +1,5 @@
+const Flash = require('../utils/Flash');
+
 /**
  * Controller to view dashboard page
  *
@@ -6,6 +8,7 @@
  */
 module.exports.dashboardGetController = (req, res) => {
     res.render('pages/dashboard/dashboard', {
-        title: 'My Dashboard'
+        title: 'My Dashboard',
+        flashMessage: Flash.getMessages(req)
     })
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const expressSession = require('express-session');
 const MongoDBSessionStore = require('connect-mongodb-session')(expressSession);
+const flash = require('connect-flash');
 const bindUserWithRequest = require('./middlewares/bindUserWithRequest');
 const localDataForViews = require('./middlewares/localDataForViews');
 const useAuthRoute = require('./routes/authRoute');
@@ -47,6 +48,9 @@ const appMiddleware = [
         },
         store: sessionStore
     }),
+
+    // Connect flash middleware
+    flash(),
 
     // Bind user object with every request
     bindUserWithRequest(),
